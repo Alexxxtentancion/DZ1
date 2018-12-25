@@ -31,9 +31,11 @@
                 <li class="nav-item {% if section == 'dashboard' %}active{% endif %}">
                     <a class="nav-link" href="/core/my_books">Мои книги</a>
                 </li>
+                {% if request.user.is_staff%}
                 <li class="nav-item {% if section == 'people' %}active{% endif %}">
-                    <a class="nav-link" href="/">О сайте</a>
+                    <a class="nav-link" href="/core/create">Добавить книгу</a>
                 </li>
+                {% endif %}
                 {% endif %}
             </ul>
 
