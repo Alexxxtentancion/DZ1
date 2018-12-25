@@ -1,8 +1,9 @@
 from account.models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, RedirectView
+from django.views.generic import ListView, DetailView, RedirectView, CreateView, UpdateView
 
+from .forms import BookForm
 from .models import Book
 
 
@@ -25,7 +26,7 @@ class UsersBooks(ListView):
         # obj1 = get_object_or_404(Profile,user=user)
         # obj2 = get_object_or_404(Book,pk=pk)
         # us_title =
-        a=Profile.objects.filter(user=user)
+        a = Profile.objects.filter(user=user)
         print([p.date_of_birth for p in a])
         return redirect('/core')
 
@@ -97,3 +98,27 @@ class BookLikeAPIToggle(APIView):
             "liked": liked
         }
         return Response(data)
+
+
+class BookCreateView(CreateView):
+    template_name = 'core/book_create.html'
+    queryset = Book.objects.all()
+    form_class = BookForm
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
+class BookUpdateView(UpdateView):
+    template_name = 'core/book_create.html'
+    queryset = Book.objects.all()
+    form_class = BookForm
+
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(Book, pk=pk)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block content %}
+<div class="mx-auto mt-5" style="width: 300px">
+    <h3 class="text-center">Добавьте свою книгу</h3>
+    <form action="." method="post" enctype="multipart/form-data">
+        {{ form|bootstrap }}
+        {% csrf_token %}
+        <p><input class="btn btn-primary" type="submit" value="Cохранить" style="display: block;width :100%;"></p>
+    </form>
+</div>
+</form>
+{% endblock %}
+

@@ -9,5 +9,7 @@ urlpatterns = [
     path('api/<int:pk>/like', views.BookLikeAPIToggle.as_view(), name='like-api-toggle'),
     path('<int:pk>/', views.BookDetail.as_view(), name='detail'),
     path('<int:pk>/get/', views.BookGet.as_view(), name='get-book'),
-    path('my_books/', views.UsersBooks.as_view(), name='get-book')
+    path('my_books/', views.UsersBooks.as_view(), name='get-book'),
+    path('create/', views.BookCreateView.as_view(), name='book-create'),
+    path('<int:pk>/update/', views.BookUpdateView.as_view(), name='book-create')
 ]
