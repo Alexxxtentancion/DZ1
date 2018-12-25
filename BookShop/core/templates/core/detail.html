@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+{%block title%}
+{{book.title}}
+{%endblock%}
+{% block jquery %}
+<script>
+
+function updateText(btn,newCount,verb){
+    btn.text(newCount + " " + verb)
+    btn.attr("data-likes",newCount)
+}
+$(".like-btn").click(function(e){
+    e.preventDefault()
+    let this_ = $(this)
+    let likeUrl = this_.attr("data-href")
+        console.log(this_.attr("data-likes"))
+    let likeCount = parseInt(this_.attr("data-likes"))
+    let addLike = likeCount + 1
+    let removeLike = likeCount -1
+    console.log(likeCount)
+    $.ajax({
+        url: likeUrl,
+        method: "GET",
+        data: {},
+        success: function(data){
+            console.log(data)
+            let newLikes;
+            if (data.liked){
+                updateText(this_,addLike,"Unlike")
+
+            } else {
+                updateText(this_,removeLike,"Like")
+            }
+        }, error: function(error){
+            console.log(error)
+            console.log("error")
+        }
+    })
+
+
+})
+
+
+</script>
+{% endblock %}
+{%block content%}
+<div class="container"
+     style="display: flex;align-items: center;justify-content: center;margin-bottom: 1rem!important;margin-top: 1rem;">
+    <div class="card text-center" style="width: 30rem;">
+        <img src="{{book.photo.url}}" class="card-img-top" alt="">
+        <div class="card-body">
+            <h5 class="card-title">{{book.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{book.author}}</h6>
+            <p class="card-text">{{book.description}}</p>
+            {% if request.user.is_authenticated %}
+            <button type="button" class="btn btn-light">
+                <a class="like-btn" data-href="{{ book.get_api_like_url }}"
+                   data-likes="{{ book.users_like.count }}"
+                   href="{{ book.get_like_url }}">{{ book.users_like.count }} Like</a>
+            </button>
+            {% endif %}
+            <p>
+                <a class="btn btn-outline-primary" href="{{book.get_book_url}}">Получить</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+{%endblock%}

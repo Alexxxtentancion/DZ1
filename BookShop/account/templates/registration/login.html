@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{# Load the tag library #}
+{% load bootstrap %}
+
+
+{% block title %}Log-in{% endblock %}
+{% block content %}
+<div class="mx-auto mt-5" style="width: 400px">
+    <h1 class="text-center">Log-in</h1>
+    {% if form.errors %}
+    <p>
+        Ваш логин и пароль не совпадают,
+        попробуйте ещё раз!
+    </p>
+    {% else %}
+    <p>Пожалуйста,авторизируйтесь,чтобы получить полный доступ к сайту! <a
+            href="{% url 'register' %}">Зарегистрироваться можно здесь.</a></p>
+
+    {% endif %}
+    <div>
+        <form action="{% url 'login' %}" method="post">
+            {{ form|bootstrap }}
+            {% csrf_token %}
+            <div class="form-label-group">
+            </div>
+            <div class="form-label-group">
+                <input type="hidden" name="next" value="{{ next }}"/>
+
+            </div>
+            <input class="btn btn-primary" type="submit" value="Log in" style="display: block;width :100%;">
+        </form>
+        <p class="text-center"><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+    </div>
+    </div>
+    {% endblock %}

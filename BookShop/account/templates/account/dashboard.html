@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h2>Личный кабинет</h2>
+    <p>Добро пожаловать в ваш личный кабинет.Вы можете <a href="{% url 'edit' %}">изменить свой
+        профиль</a> или <a href="{% url 'password_change' %}">сменить пароль</a>.</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load static %}
+
+{% block title %}Create an account{% endblock %}
+{% block content %}
+<div class="mx-auto mt-5" style="width: 400px;">
+    <h3 class="text-center">Create an account</h3>
+    <p>Please, sign up using the following form:</p>
+    <form action="." method="post">
+        {{ user_form|bootstrap }}
+        {% csrf_token %}
+        <p><input class="btn btn-primary" type="submit" value="Create my acc" style="display: block;width :100%;"></p>
+    </form>
+</div>
+{% endblock %}
