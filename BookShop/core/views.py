@@ -13,6 +13,7 @@ class BooksView(ListView):
     template_name = 'core/list.html'
     queryset = Book.objects.all()
     context_object_name = 'books'
+    paginate_by = 3
 
 
 class UsersBooks(ListView):

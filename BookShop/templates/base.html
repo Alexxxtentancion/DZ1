@@ -1,8 +1,6 @@
-{% load staticfiles %}
+{% load static %}
 {# Load the tag library #}
 {% load bootstrap %}
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +74,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
+<script src="{% static 'js/waypointjs/lib/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/waypointjs/lib/shortcuts/infinite.min.js' %}"></script>
 {% block jquery %}
 {% endblock %}
 </body>

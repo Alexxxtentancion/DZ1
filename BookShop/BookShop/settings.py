@@ -124,3 +124,4 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "/account/login"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+STATIC_ROOT = os.path.join(BASE_DIR, '/static_root')
