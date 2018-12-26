@@ -18,18 +18,21 @@ class BooksView(ListView):
 
 class UsersBooks(ListView):
     template_name = 'core/users_books_list.html'
-    queryset = Profile.objects.all()
     context_object_name = 'users_books'
 
-    def get(self, request, *args, **kwargs):
+    def get_queryset(self):
         user = self.request.user
         # pk =self.kwargs.get("pk")
         # obj1 = get_object_or_404(Profile,user=user)
         # obj2 = get_object_or_404(Book,pk=pk)
         # us_title =
         a = Profile.objects.filter(user=user)
-        print([p.date_of_birth for p in a])
-        return redirect('/core')
+        queryset = [p.my_books.all() for p in a]
+        print([p.my_books.all()[0] for p in a])
+        print(queryset)
+        print(queryset[0])
+        print(queryset[0][0])
+        return queryset[0]
 
 
 class BookDetail(DetailView):
