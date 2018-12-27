@@ -22,15 +22,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mr-auto">
-                <li class="nav-item {% if section == 'Каталог' %}active{% endif %}">
+                <li class="Каталог nav-item">
                     <a class="nav-link" href="/core/">Каталог</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                <li class="nav-item {% if section == 'Мои книги' %}active{% endif %}">
+                <li class="МоиКниги nav-item">
                     <a class="nav-link" href="/core/my_books">Мои книги</a>
                 </li>
                 {% if request.user.is_staff%}
-                <li class="nav-item {% if section == 'Создать книгу' %}active{% endif %}">
+                <li class="ДобавитьКнигу nav-item">
                     <a class="nav-link" href="/core/create">Добавить книгу</a>
                 </li>
                 {% endif %}
@@ -40,7 +40,7 @@
 
             <ul class="navbar-nav">
                 {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Привет,{{ request.user.username }}
@@ -67,6 +67,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
@@ -76,6 +77,9 @@
         crossorigin="anonymous"></script>
 <script src="{% static 'js/waypointjs/lib/jquery.waypoints.min.js' %}"></script>
 <script src="{% static 'js/waypointjs/lib/shortcuts/infinite.min.js' %}"></script>
+
+
+
 {% block jquery %}
 {% endblock %}
 </body>

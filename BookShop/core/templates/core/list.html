@@ -16,7 +16,17 @@ Books
             }
         });
 
+
+
 </script>
+<script>$(document).ready(function () {
+        $('.Каталог').addClass('active');
+    });
+
+
+</script>
+
+
 {% endblock %}
 {% block content %}
 <div class="container infinite-container">
@@ -29,7 +39,14 @@ Books
                 <h5 class="card-title">
                     <a href="{{book.get_absolute_url}}">{{ book.title }}</a>
                 </h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{book.author}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{book.author}}
+                    {% if request.user.is_staff %}
+                    <form method="POST" class="delete" action="{% url 'core:book-delete' book.id %}">
+                        {% csrf_token %}<input type="submit" value="Удалить">
+                    </form>
+                    ﻿
+                    {% endif %}
+                </h6>
             </div>
         </div>
     </div>
@@ -37,9 +54,9 @@ Books
 </div>
 
 <div class="loading" style="text-align: center;display: none;">
-        Loading...
-    </div>
-    {% if page_obj.has_next %}
-        <a class="infinite-more-link d-none" href="?page={{ page_obj.next_page_number }}">More</a>
-    {% endif %}
+    Loading...
+</div>
+{% if page_obj.has_next %}
+<a class="infinite-more-link d-none" href="?page={{ page_obj.next_page_number }}">More</a>
+{% endif %}
 {% endblock %}

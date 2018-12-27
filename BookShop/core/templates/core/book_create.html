@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% block jquery %}
+<script>$(document).ready(function () {
+        $('.ДобавитьКнигу').addClass('active');
+    });
+</script>
+{% endblock %}
 {% block content %}
 <div class="mx-auto mt-5" style="width: 300px">
     <h3 class="text-center">Добавьте свою книгу</h3>

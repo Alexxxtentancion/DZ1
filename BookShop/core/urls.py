@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+
 app_name = 'core'
 urlpatterns = [
     path('', views.BooksView.as_view(), name='list'),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('<int:pk>/get/', views.BookGet.as_view(), name='get-book'),
     path('my_books/', views.UsersBooks.as_view(), name='get-mybook'),
     path('create/', views.BookCreateView.as_view(), name='book-create'),
-    path('<int:pk>/update/', views.BookUpdateView.as_view(), name='book-create')
+    path('<int:pk>/update/', views.BookUpdateView.as_view(), name='book-create'),
+    path('<int:pk>/delete/', views.BookDeleteView.as_view(), name='book-delete')
 ]

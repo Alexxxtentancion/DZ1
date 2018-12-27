@@ -40,3 +40,7 @@ class Book(models.Model):
 
     def get_api_book_url(self):
         return reverse("core:get-api-book", kwargs={"pk": self.pk})
+
+
+
+

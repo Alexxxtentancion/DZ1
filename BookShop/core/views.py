@@ -1,8 +1,8 @@
 from account.models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView, RedirectView, CreateView, UpdateView
-
+from django.views.generic import ListView, DetailView, RedirectView, CreateView, UpdateView,DeleteView
+from django.urls import reverse_lazy
 from .forms import BookForm
 from .models import Book
 
@@ -78,7 +78,7 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 
 
-class BookGetAPIToggle(APIView,LoginRequiredMixin):
+class BookGetAPIToggle(APIView, LoginRequiredMixin):
     authentication_classes = (authentication.SessionAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     login_url = '/account/login/'
@@ -95,12 +95,12 @@ class BookGetAPIToggle(APIView,LoginRequiredMixin):
         if user.is_authenticated:
             if obj not in obj_u.my_books.all():
                 Get = True
+                Get = True
                 obj_u.my_books.add(obj)
             else:
                 Get = False
                 obj_u.my_books.remove(obj)
             updated = True
-
 
         data = {
             "updated": updated,
@@ -158,3 +158,17 @@ class BookUpdateView(UpdateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+
+
+class BookDeleteView(DeleteView):
+    model = Book
+    success_url = reverse_lazy('core:list')
+    template_name = 'core/list.html'
+
+
+
+
+
+
+
+
