@@ -7,9 +7,10 @@ urlpatterns = [
     path('', views.BooksView.as_view(), name='list'),
     path('<int:pk>/like', views.BookLikeToggle.as_view(), name='like-toggle'),
     path('api/<int:pk>/like', views.BookLikeAPIToggle.as_view(), name='like-api-toggle'),
+    path('api/<int:pk>/get', views.BookGetAPIToggle.as_view(), name='get-api-book'),
     path('<int:pk>/', views.BookDetail.as_view(), name='detail'),
     path('<int:pk>/get/', views.BookGet.as_view(), name='get-book'),
-    path('my_books/', views.UsersBooks.as_view(), name='get-book'),
+    path('my_books/', views.UsersBooks.as_view(), name='get-mybook'),
     path('create/', views.BookCreateView.as_view(), name='book-create'),
     path('<int:pk>/update/', views.BookUpdateView.as_view(), name='book-create')
 ]

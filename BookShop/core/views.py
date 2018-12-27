@@ -32,7 +32,7 @@ class UsersBooks(ListView):
         # print(queryset)
         # print(queryset[0])
         # print(queryset[0][0])
-        if len(queryset[0])!=0:
+        if len(queryset[0]) != 0:
             return queryset[0]
 
 
@@ -76,6 +76,37 @@ class BookGet(LoginRequiredMixin, RedirectView):
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+
+
+class BookGetAPIToggle(APIView,LoginRequiredMixin):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    login_url = '/account/login/'
+
+    def get(self, request, pk=None, format=None):
+        pk = self.kwargs.get("pk")
+        print(pk)
+        obj = get_object_or_404(Book, pk=pk)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        obj_u = get_object_or_404(Profile, user=user)
+        updated = False
+        Get = False
+        if user.is_authenticated:
+            if obj not in obj_u.my_books.all():
+                Get = True
+                obj_u.my_books.add(obj)
+            else:
+                Get = False
+                obj_u.my_books.remove(obj)
+            updated = True
+
+
+        data = {
+            "updated": updated,
+            "get": Get
+        }
+        return Response(data)
 
 
 class BookLikeAPIToggle(APIView):

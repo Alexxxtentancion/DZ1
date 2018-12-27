@@ -27,7 +27,6 @@ $(".like-btn").click(function(e){
             let newLikes;
             if (data.liked){
                 updateText(this_,addLike,"Unlike")
-
             } else {
                 updateText(this_,removeLike,"Like")
             }
@@ -36,11 +35,35 @@ $(".like-btn").click(function(e){
             console.log("error")
         }
     })
-
-
 })
+
+
 </script>
 <script>
+function updateText(btn,verb){
+    btn.text(verb)
+}
+$(".get-btn").click(function(e){
+    e.preventDefault()
+    let this_ = $(this)
+    let getUrl = this_.attr("data-href")
+    $.ajax({
+        url: getUrl,
+        method: "GET",
+        data: {},
+        success: function(data){
+            console.log(data)
+            if (data.get){
+                updateText(this_,"Сдать")
+            } else {
+                updateText(this_,"Получить")
+            }
+        }, error: function(error){
+            console.log(error)
+            console.log("error")
+        }
+    })
+})
 
 </script>
 {% endblock %}
@@ -63,14 +86,16 @@ $(".like-btn").click(function(e){
             <button type="button" class="btn btn-light">
                 <a class="like-btn" data-href="{{ book.get_api_like_url }}"
                    data-likes="{{ book.users_like.count }}"
-                   href="{{ book.get_like_url }}">{{ book.users_like.count }} Like</a>
+                   href="{{ book.get_like_url }}">{{ book.users_like.count }}</a>
             </button>
             {% endif %}
-            <p>
-                <a class="btn btn-outline-primary" href="{{book.get_book_url}}">Получить</a>
-            </p>
-        </div>
 
+            <p>
+                <a class="get-btn btn btn-outline-primary"  data-href="{{book.get_api_book_url}}"
+                   href="{{ book.get_book_url }}">Получить</a>
+            </p>
+
+        </div>
     </div>
 </div>
 
