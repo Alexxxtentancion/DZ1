@@ -1,6 +1,6 @@
 from account.models import Profile
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, RedirectView, CreateView, UpdateView
 
 from .forms import BookForm
@@ -28,11 +28,12 @@ class UsersBooks(ListView):
         # us_title =
         a = Profile.objects.filter(user=user)
         queryset = [p.my_books.all() for p in a]
-        print([p.my_books.all()[0] for p in a])
-        print(queryset)
-        print(queryset[0])
-        print(queryset[0][0])
-        return queryset[0]
+        # print([p.my_books.all()[0] for p in a])
+        # print(queryset)
+        # print(queryset[0])
+        # print(queryset[0][0])
+        if len(queryset[0])!=0:
+            return queryset[0]
 
 
 class BookDetail(DetailView):

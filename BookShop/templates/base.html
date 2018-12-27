@@ -22,15 +22,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mr-auto">
-                <li class="nav-item {% if section == 'images' %}active{% endif %}">
+                <li class="nav-item {% if section == 'Каталог' %}active{% endif %}">
                     <a class="nav-link" href="/core/">Каталог</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                <li class="nav-item {% if section == 'dashboard' %}active{% endif %}">
+                <li class="nav-item {% if section == 'Мои книги' %}active{% endif %}">
                     <a class="nav-link" href="/core/my_books">Мои книги</a>
                 </li>
                 {% if request.user.is_staff%}
-                <li class="nav-item {% if section == 'people' %}active{% endif %}">
+                <li class="nav-item {% if section == 'Создать книгу' %}active{% endif %}">
                     <a class="nav-link" href="/core/create">Добавить книгу</a>
                 </li>
                 {% endif %}

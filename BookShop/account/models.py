@@ -7,12 +7,12 @@ from core.models import Book
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
-    date_of_birth = models.DateField(blank=True, null=True)
+                                on_delete=models.CASCADE,verbose_name="Юзер")
+    date_of_birth = models.DateField(blank=True, null=True,verbose_name="Дата рождения")
 
     photo = models.ImageField(upload_to='users/%Y/%m/%d/',
-                              blank=True)
-    my_books = models.ManyToManyField(Book, related_name='book_got', blank=True)
+                              blank=True,verbose_name="Фото")
+    my_books = models.ManyToManyField(Book, related_name='book_got', blank=True,verbose_name="Книги")
 
     def __str__(self):
         return '{}'.format(self.user.username)

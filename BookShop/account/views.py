@@ -53,4 +53,4 @@ def edit(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    return render(request, 'core/list.html', {'section': 'Мои книги'})
